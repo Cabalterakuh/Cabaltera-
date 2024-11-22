@@ -1,0 +1,523 @@
+<html><head><base href="/" />
+<style>
+/* Your existing CSS remains unchanged */
+:root {
+  --primary: #4CAF50;  /* Garden green */
+  --dark: #2E7D32;     /* Dark green */
+  --light: #E8F5E9;    /* Light mint */
+  --shadow: rgba(0,0,0,0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #81C784, var(--dark));
+  position: relative;
+  overflow: hidden;
+}
+
+/* Add floating flowers */
+body::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath fill='%23ffffff20' d='M20 1C21 3 23 3 25 3C23 5 23 7 23 9C21 7 19 7 17 7C19 5 19 3 19 1zM2 15C3 17 5 17 7 17C5 19 5 21 5 23C3 21 1 21-1 21C1 19 1 17 1 15zM38 25C39 27 41 27 43 27C41 29 41 31 41 33C39 31 37 31 35 31C37 29 37 27 37 25z'/%3E%3C/svg%3E");
+  opacity: 0.1;
+  animation: floatingFlowers 30s linear infinite;
+}
+
+@keyframes floatingFlowers {
+  from {
+    transform: translateY(0) rotate(0deg);
+  }
+  to {
+    transform: translateY(-100%) rotate(360deg);
+  }
+}
+
+.intro {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #81C784, var(--dark));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: introFadeOut 2s ease-out forwards;
+  animation-delay: 2s;
+}
+
+.intro-content {
+  text-align: center;
+  color: white;
+  animation: introTextScale 1.5s ease-out;
+}
+
+.intro-logo {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.intro-text {
+  font-size: 2rem;
+  font-weight: 300;
+  opacity: 0;
+  animation: introTextFadeIn 1s ease-out forwards;
+  animation-delay: 0.5s;
+}
+
+@keyframes introFadeOut {
+  from {
+    opacity: 1;
+    visibility: visible;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes introTextScale {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes introTextFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Modify login-container to be initially hidden */
+.login-container {
+  opacity: 0;
+  animation: fadeIn 0.5s ease-out forwards;
+  animation-delay: 3s;
+}
+
+.login-container {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px var(--shadow);
+  width: 100%;
+  max-width: 400px;
+  animation: fadeIn 0.5s ease-out;
+  border: 2px solid #A5D6A7;
+  position: relative;
+}
+
+.login-container::before {
+  content: "🌿";
+  position: absolute;
+  top: -20px;
+  left: 20px;
+  font-size: 2rem;
+}
+
+.login-container::after {
+  content: "🌿";
+  position: absolute;
+  bottom: -20px;
+  right: 20px;
+  font-size: 2rem;
+  transform: rotate(180deg);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h1 {
+  color: var(--dark);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.input-group {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 0.75rem;
+  padding-right: 40px; /* Make room for the toggle button */
+  border: 2px solid var(--light);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  background-color: #FAFAFA;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background-color: white;
+}
+
+.input-group label {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #7CB342;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  font-size: 1rem;
+}
+
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label {
+  top: -0.5rem;
+  left: 0.5rem;
+  font-size: 0.8rem;
+  background: white;
+  padding: 0 0.25rem;
+  color: var(--primary);
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 5px;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+}
+
+.toggle-password:hover {
+  color: var(--dark);
+}
+
+.toggle-password svg {
+  width: 20px;
+  height: 20px;
+  transition: all 0.3s ease;
+}
+
+.remember-me {
+  margin-bottom: 1.5rem;
+  color: var(--dark);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.remember-me input[type="checkbox"] {
+  margin-right: 0.5rem;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+.remember-me label {
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.remember-me a:hover {
+  color: var(--dark);
+  text-decoration: underline;
+}
+
+button {
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+button:hover {
+  background: #388E3C;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+}
+
+.links {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.links a {
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin: 0 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.links a:hover {
+  color: var(--dark);
+  text-decoration: underline;
+}
+
+/* Add Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  max-width: 400px;
+  width: 90%;
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-close {
+  float: right;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: var(--dark);
+}
+</style>
+</head>
+<body>
+  <div class="intro">
+    <div class="intro-content">
+      <div class="intro-logo">🌿</div>
+      <div class="intro-text">Welcome to Limpio Garden</div>
+    </div>
+  </div>
+  <div class="login-container">
+    <h1>Welcome Limpio</h1>
+    <form id="loginForm">
+      <div class="input-group">
+        <input type="text" id="username" placeholder=" " required>
+        <label for="username">Username</label>
+        <!-- Adding human icon for username -->
+        <svg style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; color: var(--primary);" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </div>
+      <div class="input-group">
+        <input type="password" id="password" placeholder=" " required>
+        <label for="password">Password</label>
+        <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+        </button>
+      </div>
+      <div class="remember-me">
+        <div style="display: flex; align-items: center;">
+          <input type="checkbox" id="rememberMe">
+          <label for="rememberMe">Remember me</label>
+        </div>
+        <a href="javascript:void(0)" id="forgotPasswordLink" style="color: var(--primary); text-decoration: none; font-size: 0.9rem;">Forgot Password?</a>
+      </div>
+      <button type="submit">Log In</button>
+    </form>
+    <div class="links">
+      <a href="https://example.com/signup" id="createAccount">Don't have an account? Create account</a>
+    </div>
+  </div>
+
+  <!-- Forgot Password Modal -->
+  <div class="modal" id="forgotPasswordModal">
+    <div class="modal-content">
+      <span class="modal-close" id="closeModal">&times;</span>
+      <h2 style="color: var(--dark); margin-bottom: 1rem;">Reset Password</h2>
+      <form id="resetPasswordForm">
+        <div class="input-group">
+          <input type="text" id="resetEmail" placeholder=" " required>
+          <label for="resetEmail">Enter your username</label>
+        </div>
+        <button type="submit">Send Reset Link</button>
+      </form>
+    </div>
+  </div>
+
+<script>
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+  const rememberMe = document.getElementById('rememberMe').checked;
+  
+  // Here you would typically make an API call to your backend
+  console.log('Login attempt:', { username, password, rememberMe });
+  
+  // If remember me is checked, we could store the username in localStorage
+  if (rememberMe) {
+    localStorage.setItem('rememberedUsername', username);
+  } else {
+    localStorage.removeItem('rememberedUsername');
+  }
+  
+  // Simulate login process
+  const button = this.querySelector('button');
+  button.innerHTML = 'Logging in...';
+  button.disabled = true;
+  
+  setTimeout(() => {
+    button.innerHTML = 'Success!';
+    button.style.background = '#2E7D32';
+    
+    // Reset after 1 second
+    setTimeout(() => {
+      button.innerHTML = 'Log In';
+      button.disabled = false;
+      button.style.background = '';
+    }, 1000);
+  }, 1500);
+});
+
+// Check for remembered username on page load
+window.addEventListener('load', function() {
+  const rememberedUsername = localStorage.getItem('rememberedUsername');
+  if (rememberedUsername) {
+    document.getElementById('username').value = rememberedUsername;
+    document.getElementById('rememberMe').checked = true;
+  }
+
+  // Ensure the intro animation only plays once per session
+  const hasSeenIntro = sessionStorage.getItem('hasSeenIntro');
+  const intro = document.querySelector('.intro');
+  
+  if (hasSeenIntro) {
+    intro.style.display = 'none';
+    document.querySelector('.login-container').style.opacity = '1';
+  } else {
+    sessionStorage.setItem('hasSeenIntro', 'true');
+  }
+});
+
+// Forgot Password Modal Functionality
+const modal = document.getElementById('forgotPasswordModal');
+const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+const closeModal = document.getElementById('closeModal');
+
+forgotPasswordLink.addEventListener('click', function() {
+  modal.style.display = 'flex';
+});
+
+closeModal.addEventListener('click', function() {
+  modal.style.display = 'none';
+});
+
+window.addEventListener('click', function(event) {
+  if (event.target === modal) {
+    modal.style.display = 'none';
+  }
+});
+
+document.getElementById('resetPasswordForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const username = document.getElementById('resetEmail').value;
+  const button = this.querySelector('button');
+  
+  button.innerHTML = 'Sending...';
+  button.disabled = true;
+  
+  // Simulate sending reset link
+  setTimeout(() => {
+    button.innerHTML = 'Reset Link Sent!';
+    button.style.background = '#2E7D32';
+    
+    setTimeout(() => {
+      modal.style.display = 'none';
+      button.innerHTML = 'Send Reset Link';
+      button.disabled = false;
+      button.style.background = '';
+      document.getElementById('resetEmail').value = '';
+    }, 2000);
+  }, 1500);
+});
+
+// Add new password toggle functionality
+document.querySelector('.toggle-password').addEventListener('click', function() {
+  const passwordInput = document.getElementById('password');
+  const icon = this.querySelector('svg');
+  
+  if (passwordInput.type === 'password') {
+    passwordInput.type = 'text';
+    icon.innerHTML = `
+      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+      <line x1="1" y1="1" x2="23" y2="23"/>
+      <line x1="1" y1="23" x2="23" y2="1"/>
+    `;
+  } else {
+    passwordInput.type = 'password';
+    icon.innerHTML = `
+      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+      <circle cx="12" cy="12" r="3"/>
+    `;
+  }
+});
+</script>
+</body></html>
